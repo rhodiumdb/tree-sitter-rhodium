@@ -1,0 +1,104 @@
+============================================
+Functions
+============================================
+
+fn main() {}
+
+fn add(x: i32, y: u600) -> i27 {
+    return x + y;
+}
+
+---
+
+(source_file
+  (function_item
+    name: (identifier)
+    parameters: (parameters)
+    body: (block))
+  (function_item
+    name: (identifier)
+    parameters: (parameters
+      (parameter
+        pattern: (identifier)
+        type: (primitive_types))
+      (parameter
+        pattern: (identifier)
+        type: (primitive_types)))
+    return_type: (primitive_types)
+    body: (block
+      (return_expression
+        (binary_expression
+          left: (identifier)
+          right: (identifier))))))
+
+============================================
+Tables
+============================================
+
+table Foo {
+    bar: Bar,
+    baz: u67,
+    qux: i30,
+    bar -> baz,
+    (bar, baz) -> qux,
+    qux -> (bar, baz),
+    (bar, baz) -> (bar, baz, qux),
+}
+
+---
+
+(source_file
+  (table_item
+   name: (type_identifier)
+   body: (table_field_declaration_list
+          (table_field_declaration (field_declaration
+                                    name: (field_identifier)
+                                    type: (type_identifier)))
+          (table_field_declaration (field_declaration
+                                    name: (field_identifier)
+                                    type: (primitive_types)))
+          (table_field_declaration (field_declaration
+                                    name: (field_identifier)
+                                    type: (primitive_types)))
+          (table_field_declaration (table_functional_dependency
+                                    sources: (field_identifier)
+                                    targets: (field_identifier)))
+          (table_field_declaration (table_functional_dependency
+                                    sources: (field_identifier)
+                                    sources: (field_identifier)
+                                    targets: (field_identifier)))
+          (table_field_declaration (table_functional_dependency
+                                    sources: (field_identifier)
+                                    targets: (field_identifier)
+                                    targets: (field_identifier)))
+          (table_field_declaration (table_functional_dependency
+                                    sources: (field_identifier)
+                                    sources: (field_identifier)
+                                    targets: (field_identifier)
+                                    targets: (field_identifier)
+                                    targets: (field_identifier))))))
+
+============================================
+Queries
+============================================
+
+query Foo::bar(self, param1: Param, param2: i30) -> Relation<i32, i74, i62> {
+}
+
+---
+
+(source_file
+  (query_item
+   name: (type_identifier)
+   name: (identifier)
+   parameters: (parameters
+                (self_parameter (self))
+                (parameter pattern: (identifier) type: (type_identifier))
+                (parameter pattern: (identifier) type: (primitive_types)))
+   return_type: (generic_type
+                 type: (type_identifier)
+                 type_arguments: (type_arguments
+                                  (primitive_types)
+                                  (primitive_types)
+                                  (primitive_types)))
+   body: (block)))

@@ -1,0 +1,36 @@
+fn main() {}
+
+fn add(x: i32, y: u600) -> i27 {
+    return x + y;
+}
+
+fn foo<T>(x: T) -> T {
+    return x;
+}
+
+struct Bar {
+    foo: i20,
+    bar: u90
+}
+
+table Foo {
+    bar: Bar,
+    baz: u67,
+    qux: i30,
+    bar -> baz,
+    (bar, baz) -> qux,
+    qux -> (bar, baz),
+    (bar, baz) -> (bar, baz, qux),
+}
+
+// comment
+/// doc comment
+#[foo]
+#[bar(baz, 123)]
+query Foo::bar(self, param1: Param, param2: i30) -> rel<i32, i74, string> {
+    let foo = param1 + param2;
+    let bar = 123i32;
+    let baz = 123;
+    let qux = true || false;
+    return [foo, foo, foo];
+}
