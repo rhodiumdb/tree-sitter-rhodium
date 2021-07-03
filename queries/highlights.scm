@@ -32,7 +32,7 @@
     "::"
     name: (identifier) @function))
 
-(generic_function) @function
+(instantiation) @function
 
 ; Function definitions
 
